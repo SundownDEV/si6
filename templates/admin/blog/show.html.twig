@@ -11,7 +11,7 @@
     </p>
 
     <div class="well">
-        <p class="m-b-0"><strong>{{ 'label.summary'|trans }}</strong>: {{ post.summary }}</p>
+        <p class="m-b-0"><strong>Extrait</strong>: {{ post.summary }}</p>
     </div>
 
     {{ post.content|md2html }}
@@ -31,6 +31,4 @@
     </div>
 
     {{ parent() }}
-
-    {{ show_source_code(_self) }}
 {% endblock %}
