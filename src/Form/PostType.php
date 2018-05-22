@@ -12,12 +12,12 @@
 namespace App\Form;
 
 use App\Entity\Post;
-use App\Form\Type\DateTimePickerType;
 use App\Form\Type\TagsInputType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 /**
  * Defines the form used to create and manipulate blog posts.
@@ -45,21 +45,21 @@ class PostType extends AbstractType
         $builder
             ->add('title', null, [
                 'attr' => ['autofocus' => true],
-                'label' => 'label.title',
+                'label' => 'Titre',
             ])
             ->add('summary', TextareaType::class, [
-                'label' => 'label.summary',
+                'label' => 'Extrait',
             ])
             ->add('content', null, [
                 'attr' => ['rows' => 20],
-                'label' => 'label.content',
-            ])
-            ->add('publishedAt', DateTimePickerType::class, [
-                'label' => 'label.published_at',
+                'label' => 'Contenu de l\'article',
             ])
             ->add('tags', TagsInputType::class, [
-                'label' => 'label.tags',
+                'label' => 'Tags',
                 'required' => false,
+            ])
+            ->add('image', FileType::class, [
+                'label' => 'Image de couverture (jpg, png)',
             ])
         ;
     }
