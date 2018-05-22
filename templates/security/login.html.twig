@@ -18,28 +18,28 @@
 <body class="text-center">
 <form action="{{ path('security_login') }}" method="post" class="form-signin">
 
-    <h1 class="h3 mb-3 font-weight-normal">Vulcano</h1>
+    <h1 class="h3 mb-3 font-weight-normal">Une Année de Voyage</h1>
 
     {% if error %}
         <div class="alert alert-danger">
-            {{ error.messageKey|trans(error.messageData, 'security') }}
+            Vos identifiants sont invalides
         </div>
     {% endif %}
 
         <div class="form-label-group">
-            <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" placeholder="{{ 'label.username'|trans }}" required autofocus>
+            <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" placeholder="Identifiant" required autofocus>
             <label for="username">Identifiant</label>
         </div>
 
         <div class="form-label-group">
-            <input type="password" id="password" name="_password" class="form-control" placeholder="{{ 'label.password'|trans }}" required>
+            <input type="password" id="password" name="_password" class="form-control" placeholder="Mot de passe" required>
             <label for="password">Mot de passe</label>
         </div>
 
         <input type="hidden" name="_target_path" value="{{ app.request.get('redirect_to') }}"/>
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit">{{ 'action.sign_in'|trans }}</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Connexion</button>
     </form>
 </body>
 </html>
