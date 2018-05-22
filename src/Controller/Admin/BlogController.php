@@ -14,28 +14,21 @@ namespace App\Controller\Admin;
 use App\Entity\Post;
 use App\Form\PostType;
 use App\Repository\PostRepository;
+use App\Service\FileUploader;
 use App\Utils\Slugger;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Controller used to manage blog contents in the backend.
+ * Controller used to manage contents in the backend.
  *
- * Please note that the application backend is developed manually for learning
- * purposes. However, in your real Symfony application you should use any of the
- * existing bundles that let you generate ready-to-use backends without effort.
- *
- * See http://knpbundles.com/keyword/admin
- *
- * @Route("/admin/post")
+ * @Route("/admin/post", name="admin_post_")
  * @Security("has_role('ROLE_ADMIN')")
- *
- * @author Ryan Weaver <weaverryan@gmail.com>
- * @author Javier Eguiluz <javier.eguiluz@gmail.com>
  */
 class BlogController extends AbstractController
 {
@@ -50,8 +43,8 @@ class BlogController extends AbstractController
      *     could move this annotation to any other controller while maintaining
      *     the route name and therefore, without breaking any existing link.
      *
-     * @Route("/", methods={"GET"}, name="admin_index")
-     * @Route("/", methods={"GET"}, name="admin_post_index")
+     * @Route("/", methods={"GET"}, name="index")
+     * @Route("/", methods={"GET"}, name="index")
      */
     public function index(PostRepository $posts): Response
     {
@@ -63,13 +56,13 @@ class BlogController extends AbstractController
     /**
      * Creates a new Post entity.
      *
-     * @Route("/new", methods={"GET", "POST"}, name="admin_post_new")
+     * @Route("/new", methods={"GET", "POST"}, name="new")
      *
      * NOTE: the Method annotation is optional, but it's a recommended practice
      * to constraint the HTTP methods each controller responds to (by default
      * it responds to all methods).
      */
-    public function new(Request $request): Response
+    public function new(Request $request, FileUploader $fileUploader): Response
     {
         $post = new Post();
         $post->setAuthor($this->getUser());
@@ -86,6 +79,12 @@ class BlogController extends AbstractController
         // See https://symfony.com/doc/current/best_practices/forms.html#handling-form-submits
         if ($form->isSubmitted() && $form->isValid()) {
             $post->setSlug(Slugger::slugify($post->getTitle()));
+
+            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
+            $file = $post->getImage();
+            $fileName = $fileUploader->upload($file);
+
+            $post->setImage($fileName);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($post);
@@ -113,7 +112,7 @@ class BlogController extends AbstractController
     /**
      * Finds and displays a Post entity.
      *
-     * @Route("/{id}", requirements={"id": "\d+"}, methods={"GET"}, name="admin_post_show")
+     * @Route("/{id}", requirements={"id": "\d+"}, methods={"GET"}, name="show")
      */
     public function show(Post $post): Response
     {
@@ -129,7 +128,7 @@ class BlogController extends AbstractController
     /**
      * Displays a form to edit an existing Post entity.
      *
-     * @Route("/{id}/edit", requirements={"id": "\d+"}, methods={"GET", "POST"}, name="admin_post_edit")
+     * @Route("/{id}/edit", requirements={"id": "\d+"}, methods={"GET", "POST"}, name="edit")
      */
     public function edit(Request $request, Post $post): Response
     {
@@ -156,13 +155,13 @@ class BlogController extends AbstractController
     /**
      * Deletes a Post entity.
      *
-     * @Route("/{id}/delete", methods={"POST"}, name="admin_post_delete")
+     * @Route("/{id}/delete", methods={"POST"}, name="delete")
      * @Security("is_granted('delete', post)")
      *
      * The Security annotation value is an expression (if it evaluates to false,
      * the authorization mechanism will prevent the user accessing this resource).
      */
-    public function delete(Request $request, Post $post): Response
+    public function delete(Request $request, Post $post, Controller $controller): Response
     {
         if (!$this->isCsrfTokenValid('delete', $request->request->get('token'))) {
             return $this->redirectToRoute('admin_post_index');

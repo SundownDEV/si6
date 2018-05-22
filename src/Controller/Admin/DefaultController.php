@@ -8,8 +8,23 @@
 
 namespace App\Controller\Admin;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
-class DefaultController
+/**
+ * Controller used to manage contents in the backend.
+ *
+ * @Route("/admin", name="admin_")
+ * @Security("has_role('ROLE_ADMIN')")
+ */
+class DefaultController extends AbstractController
 {
-
+    /**
+     * @Route("/", name="index")
+     */
+    public function index()
+    {
+        return $this->render('@admin/index.html.twig');
+    }
 }
