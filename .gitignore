@@ -1,5 +1,6 @@
 .idea
 /public/build/
+/public/uploads
 /node_modules/
 package-lock.json
 npm-debug.log
