@@ -3,6 +3,12 @@
 {% block body_id 'admin_post_show' %}
 
 {% block main %}
+    <div>
+        <img src="{{ asset('uploads') }}/{{ post.image }}" style="max-width:30%;height:auto;" alt="">
+    </div>
+
+    <br>
+    
     <h1>{{ post.title }}</h1>
 
     <p class="post-metadata">
@@ -17,12 +23,10 @@
     {{ post.content|md2html }}
 
     {{ include('blog/_post_tags.html.twig') }}
-{% endblock %}
 
-{% block sidebar %}
     <div class="section">
-        <a href="{{ path('admin_post_edit', {id: post.id}) }}" class="btn btn-lg btn-block btn-success">
-            <i class="fa fa-edit" aria-hidden="true"></i> {{ 'action.edit_contents'|trans }}
+        <a href="{{ path('admin_post_edit', {id: post.id}) }}" class="btn btn-success">
+            <i class="fa fa-edit" aria-hidden="true"></i> Modifier
         </a>
     </div>
 
