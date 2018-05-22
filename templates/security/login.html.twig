@@ -28,12 +28,12 @@
 
         <div class="form-label-group">
             <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" placeholder="{{ 'label.username'|trans }}" required autofocus>
-            <label for="username">{{ 'label.username'|trans }}</label>
+            <label for="username">Identifiant</label>
         </div>
 
         <div class="form-label-group">
             <input type="password" id="password" name="_password" class="form-control" placeholder="{{ 'label.password'|trans }}" required>
-            <label for="password">{{ 'label.password'|trans }}</label>
+            <label for="password">Mot de passe</label>
         </div>
 
         <input type="hidden" name="_target_path" value="{{ app.request.get('redirect_to') }}"/>
