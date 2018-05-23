@@ -4,7 +4,7 @@
 
 {% block main %}
     <div>
-        <img src="{{ asset('uploads') }}/{{ post.image }}" style="max-width:30%;height:auto;" alt="">
+        <img src="{{ asset('uploads/') ~ post.image }}" style="max-width:30%;height:auto;" alt="">
     </div>
 
     <br>
@@ -25,12 +25,10 @@
     {{ include('blog/_post_tags.html.twig') }}
 
     <div class="section">
-        <a href="{{ path('admin_post_edit', {id: post.id}) }}" class="btn btn-success">
+        <a href="{{ path('admin_post_edit', {id: post.id}) }}" class="btn btn-primary">
             <i class="fa fa-edit" aria-hidden="true"></i> Modifier
         </a>
-    </div>
 
-    <div class="section">
         {{ include('admin/blog/_delete_form.html.twig', {post: post}, with_context = false) }}
     </div>
 
