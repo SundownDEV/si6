@@ -15,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PartnerRepository")
+ * @ORM\Table(name="m3e8RS_partner")
  */
 class Partner
 {

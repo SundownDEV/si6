@@ -15,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MessageRepository")
+ * @ORM\Table(name="dF5ky2_message")
  */
 class Message
 {

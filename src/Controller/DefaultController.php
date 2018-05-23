@@ -14,6 +14,10 @@ namespace App\Controller;
 use App\Service\TwitterAPI;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
+use App\Entity\Message;
+use Symfony\Component\HttpFoundation\Response;
+use App\Form\MessageType;
 
 /**
  * Class DefaultController.
@@ -28,6 +32,29 @@ class DefaultController extends Controller
     public function index()
     {
         return $this->render('default/index.html.twig');
+    }
+
+    /**
+     * @Route("/contact", name="contact", methods="GET|POST")
+     */
+    public function contact(Request $request): Response
+    {
+        $message = new Message();
+        $form = $this->createForm(MessageType::class, $message);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($message);
+            $em->flush();
+
+            return $this->redirectToRoute('admin_message_index');
+        }
+
+        return $this->render('default/contact/new.html.twig', [
+            'message' => $message,
+            'form' => $form->createView(),
+        ]);
     }
 
     /**

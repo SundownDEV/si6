@@ -33,7 +33,9 @@ class CompanyController extends Controller
      */
     public function index(CompanyRepository $companyRepository): Response
     {
-        return $this->render('@admin/company/index.html.twig', ['companies' => $companyRepository->findAll()]);
+        return $this->render('@admin/company/index.html.twig', [
+            'companies' => $companyRepository->findAllById()
+        ]);
     }
 
     /**
