@@ -21,10 +21,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Controller used to manage articles in the backend.
@@ -135,11 +135,7 @@ class BlogController extends AbstractController
     public function edit(Request $request, Post $post, ContainerInterface $container): Response
     {
         $this->denyAccessUnlessGranted('edit', $post, 'Posts can only be edited by their authors.');
-
-        $post->setImage(
-            new File($container->getParameter('upload_dir').'/'.$post->getImage())
-        );
-
+        
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 
@@ -180,7 +176,7 @@ class BlogController extends AbstractController
         $post->getTags()->clear();
 
         // Remove post image
-        $filesystem->remove(array('symlink', '/var/www/si6/public/uploads/' . $post->getImage()));
+        $filesystem->remove(['symlink', '/var/www/si6/public/uploads/'.$post->getImage()]);
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($post);

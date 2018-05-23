@@ -14,11 +14,12 @@ namespace App\Form;
 use App\Entity\Post;
 use App\Form\Type\TagsInputType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\DataTransformer\DataTransformerChain;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 /**
  * Defines the form used to create and manipulate blog posts.
@@ -66,7 +67,6 @@ class PostType extends AbstractType
                 'label' => 'Image de couverture (jpg, png)',
                 'required' => false,
             ])
-            //->addModelTransformer(new DataTransformerChain())
         ;
     }
 
@@ -84,7 +84,7 @@ class PostType extends AbstractType
                 'csrf_field_name' => '_token',
                 // an arbitrary string used to generate the value of the token
                 // using a different string for each form improves its security
-                'csrf_token_id'   => 'task_item',
+                'csrf_token_id' => 'task_item',
             ])
         ;
     }

@@ -1,9 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: sundowndev
- * Date: 23/05/18
- * Time: 15:58
+
+/*
+ * This file is part of the Symfony package.
+ *
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace App\Service;
@@ -25,14 +28,14 @@ class TwitterAPI
         $this->CONSUMER_KEY = '';
         $this->CONSUMER_SECRET = '';
 
-        $this->access_token = "";
-        $this->access_token_secret = "";
+        $this->access_token = '';
+        $this->access_token_secret = '';
 
         $this->connection = new TwitterOAuth($this->CONSUMER_KEY, $this->CONSUMER_SECRET, $this->access_token, $this->access_token_secret);
     }
 
     public function getUserTweets(string $username, int $count = 1, bool $exclude_replies = true)
     {
-        return $this->connection->get("statuses/user_timeline", ["screen_name" => $username, "count" => $count, "exclude_replies" => $exclude_replies]);
+        return $this->connection->get('statuses/user_timeline', ['screen_name' => $username, 'count' => $count, 'exclude_replies' => $exclude_replies]);
     }
 }
