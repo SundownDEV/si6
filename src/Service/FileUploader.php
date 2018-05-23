@@ -4,14 +4,15 @@ namespace App\Service;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class FileUploader extends Controller
 {
     private $targetDirectory;
 
-    public function __construct()
+    public function __construct(ContainerInterface $container)
     {
-        $this->targetDirectory = '/var/www/si6/public/uploads';
+        $this->targetDirectory = $container->getParameter('upload_dir');
     }
 
     public function upload(UploadedFile $file)

@@ -14,7 +14,6 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -29,7 +28,7 @@ class Post
      *
      * See https://symfony.com/doc/current/best_practices/configuration.html#constants-vs-configuration-options
      */
-    public const NUM_ITEMS = 10;
+    public const NUM_ITEMS = 5;
 
     /**
      * @var int
@@ -44,7 +43,7 @@ class Post
      * @var string
      *
      * @ORM\Column(type="string")
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="Veuillez renseigner un titre")
      */
     private $title;
 
@@ -59,7 +58,7 @@ class Post
      * @var string
      *
      * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="post.blank_summary")
+     * @Assert\NotBlank(message="Veuillez entrer un extrait")
      */
     private $summary;
 
@@ -67,8 +66,8 @@ class Post
      * @var string
      *
      * @ORM\Column(type="text")
-     * @Assert\NotBlank(message="post.blank_content")
-     * @Assert\Length(min=10, minMessage="post.too_short_content")
+     * @Assert\NotBlank(message="Veuillez entrer un contenu")
+     * @Assert\Length(min=10, minMessage="Veuillez entrer un contenu de 10 caractères minimum")
      */
     private $content;
 
@@ -89,25 +88,12 @@ class Post
     private $author;
 
     /**
-     * @var Comment[]|ArrayCollection
-     *
-     * @ORM\OneToMany(
-     *      targetEntity="Comment",
-     *      mappedBy="post",
-     *      orphanRemoval=true,
-     *      cascade={"persist"}
-     * )
-     * @ORM\OrderBy({"publishedAt": "DESC"})
-     */
-    private $comments;
-
-    /**
      * @var Tag[]|ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="App\Entity\Tag", cascade={"persist"})
      * @ORM\JoinTable(name="symfony_demo_post_tag")
      * @ORM\OrderBy({"name": "ASC"})
-     * @Assert\Count(max="4", maxMessage="post.too_many_tags")
+     * @Assert\Count(max="4", maxMessage="Vous ne pouvez pas dépasser 4 tags pour un article")
      */
     private $tags;
 
@@ -125,7 +111,6 @@ class Post
     public function __construct()
     {
         $this->publishedAt = new \DateTime();
-        $this->comments = new ArrayCollection();
         $this->tags = new ArrayCollection();
     }
 
@@ -182,25 +167,6 @@ class Post
     public function setAuthor(?User $author): void
     {
         $this->author = $author;
-    }
-
-    public function getComments(): Collection
-    {
-        return $this->comments;
-    }
-
-    public function addComment(?Comment $comment): void
-    {
-        $comment->setPost($this);
-        if (!$this->comments->contains($comment)) {
-            $this->comments->add($comment);
-        }
-    }
-
-    public function removeComment(Comment $comment): void
-    {
-        $comment->setPost(null);
-        $this->comments->removeElement($comment);
     }
 
     public function getSummary(): ?string

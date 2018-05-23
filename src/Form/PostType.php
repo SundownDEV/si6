@@ -46,13 +46,16 @@ class PostType extends AbstractType
             ->add('title', null, [
                 'attr' => ['autofocus' => true],
                 'label' => 'Titre',
+                'required' => true,
             ])
             ->add('summary', TextareaType::class, [
                 'label' => 'Extrait',
+                'required' => true,
             ])
             ->add('content', null, [
                 'attr' => ['rows' => 20],
                 'label' => 'Contenu de l\'article',
+                'required' => true,
             ])
             ->add('tags', TagsInputType::class, [
                 'label' => 'Tags',
@@ -69,8 +72,17 @@ class PostType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => Post::class,
-        ]);
+        $resolver
+            ->setDefaults([
+                'data_class' => Post::class,
+                // enable/disable CSRF protection for this form
+                'csrf_protection' => true,
+                // the name of the hidden HTML field that stores the token
+                'csrf_field_name' => '_token',
+                // an arbitrary string used to generate the value of the token
+                // using a different string for each form improves its security
+                'csrf_token_id'   => 'task_item',
+            ])
+        ;
     }
 }

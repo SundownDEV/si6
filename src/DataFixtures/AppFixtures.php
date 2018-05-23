@@ -11,7 +11,6 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Comment;
 use App\Entity\Post;
 use App\Entity\Tag;
 use App\Entity\User;
@@ -79,15 +78,6 @@ class AppFixtures extends Fixture
             $post->addTag(...$tags);
             $post->setImage('test.jpg');
 
-            foreach (range(1, 5) as $i) {
-                $comment = new Comment();
-                $comment->setAuthor($this->getReference('admin'));
-                $comment->setContent($this->getRandomText(random_int(255, 512)));
-                $comment->setPublishedAt(new \DateTime('now + '.$i.'seconds'));
-
-                $post->addComment($comment);
-            }
-
             $manager->persist($post);
         }
 
@@ -99,7 +89,7 @@ class AppFixtures extends Fixture
         return [
             // $userData = [$fullname, $username, $password, $email, $roles];
             ['John Admin', 'admin', 'admin', 'john_admin@symfony.com', ['ROLE_ADMIN']],
-            ['John Admin', 'user', 'user', 'john_user@symfony.com', ['ROLE_USER']],
+            ['John User', 'user', 'user', 'john_user@symfony.com', ['ROLE_USER']],
         ];
     }
 
@@ -119,7 +109,7 @@ class AppFixtures extends Fixture
     {
         $posts = [];
         foreach ($this->getPhrases() as $i => $title) {
-            // $postData = [$title, $slug, $summary, $content, $publishedAt, $author, $tags, $comments];
+            // $postData = [$title, $slug, $summary, $content, $publishedAt, $author, $tags];
             $posts[] = [
                 $title,
                 Slugger::slugify($title),
