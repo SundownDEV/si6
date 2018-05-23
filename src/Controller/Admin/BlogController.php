@@ -25,7 +25,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Controller used to manage contents in the backend.
+ * Controller used to manage articles in the backend.
  *
  * @Route("/admin/post", name="admin_post_")
  * @Security("has_role('ROLE_ADMIN')")

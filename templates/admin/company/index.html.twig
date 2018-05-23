@@ -1,0 +1,37 @@
+{% extends '@admin/layout.html.twig' %}
+
+{% block title %}Compagnies aériennes{% endblock %}
+
+{% block body_id 'admin_company_index' %}
+
+{% block buttons %}
+    <div class="btn-group mr-2">
+        <a href="{{ path('admin_company_new') }}" class="btn btn-sm btn-outline-secondary">Ajouter une compagnie</a>
+    </div>
+{% endblock %}
+
+{% block main %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Twitter</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for company in companies %}
+            <tr>
+                <td>{{ company.twitter }}</td>
+                <td>
+                    <a href="{{ path('admin_company_show', {'id': company.id}) }}">Afficher</a>
+                    <a href="{{ path('admin_company_edit', {'id': company.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Aucun résultat</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

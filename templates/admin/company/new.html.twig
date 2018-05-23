@@ -1,0 +1,11 @@
+{% extends '@admin/layout.html.twig' %}
+
+{% block title %}Ajouter une compagnie aérienne{% endblock %}
+
+{% block main %}
+    {{ include('@admin/company/_form.html.twig') }}
+
+    <hr>
+
+    <a href="{{ path('admin_company_index') }}" class="btn btn-primary">Retour à la liste</a>
+{% endblock %}
