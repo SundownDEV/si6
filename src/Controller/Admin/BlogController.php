@@ -19,6 +19,7 @@ use App\Utils\Slugger;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -94,7 +95,7 @@ class BlogController extends AbstractController
             // actions. They are deleted automatically from the session as soon
             // as they are accessed.
             // See https://symfony.com/doc/current/book/controller.html#flash-messages
-            $this->addFlash('success', 'post.created_successfully');
+            $this->addFlash('success', 'Article créé avec succès');
 
             if ($form->get('saveAndCreateNew')->isClicked()) {
                 return $this->redirectToRoute('admin_post_new');
@@ -130,7 +131,7 @@ class BlogController extends AbstractController
      *
      * @Route("/{id}/edit", requirements={"id": "\d+"}, methods={"GET", "POST"}, name="edit")
      */
-    public function edit(Request $request, Post $post): Response
+    public function edit(Request $request, Post $post, FileUploader $fileUploader): Response
     {
         $this->denyAccessUnlessGranted('edit', $post, 'Posts can only be edited by their authors.');
 
@@ -139,9 +140,10 @@ class BlogController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $post->setSlug(Slugger::slugify($post->getTitle()));
+
             $this->getDoctrine()->getManager()->flush();
 
-            $this->addFlash('success', 'post.updated_successfully');
+            $this->addFlash('success', 'Article mis à jour avec succès');
 
             return $this->redirectToRoute('admin_post_edit', ['id' => $post->getId()]);
         }
@@ -161,7 +163,7 @@ class BlogController extends AbstractController
      * The Security annotation value is an expression (if it evaluates to false,
      * the authorization mechanism will prevent the user accessing this resource).
      */
-    public function delete(Request $request, Post $post, Controller $controller): Response
+    public function delete(Request $request, Post $post, Filesystem $filesystem): Response
     {
         if (!$this->isCsrfTokenValid('delete', $request->request->get('token'))) {
             return $this->redirectToRoute('admin_post_index');
@@ -172,11 +174,14 @@ class BlogController extends AbstractController
         // because foreign key support is not enabled by default in SQLite
         $post->getTags()->clear();
 
+        // Remove post image
+        $filesystem->remove(array('symlink', '/var/www/si6/public/uploads/' . $post->getImage()));
+
         $em = $this->getDoctrine()->getManager();
         $em->remove($post);
         $em->flush();
 
-        $this->addFlash('success', 'post.deleted_successfully');
+        $this->addFlash('success', 'Article supprimé avec succès');
 
         return $this->redirectToRoute('admin_post_index');
     }
