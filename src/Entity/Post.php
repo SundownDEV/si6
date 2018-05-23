@@ -44,7 +44,7 @@ class Post
      * @var string
      *
      * @ORM\Column(type="string")
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="Veuillez renseigner un titre")
      */
     private $title;
 
@@ -59,7 +59,7 @@ class Post
      * @var string
      *
      * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="post.blank_summary")
+     * @Assert\NotBlank(message="Veuillez entrer un extrait")
      */
     private $summary;
 
@@ -67,8 +67,8 @@ class Post
      * @var string
      *
      * @ORM\Column(type="text")
-     * @Assert\NotBlank(message="post.blank_content")
-     * @Assert\Length(min=10, minMessage="post.too_short_content")
+     * @Assert\NotBlank(message="Veuillez entrer un contenu")
+     * @Assert\Length(min=10, minMessage="Veuillez entrer un contenu de 10 caractères minimum")
      */
     private $content;
 
@@ -107,7 +107,7 @@ class Post
      * @ORM\ManyToMany(targetEntity="App\Entity\Tag", cascade={"persist"})
      * @ORM\JoinTable(name="symfony_demo_post_tag")
      * @ORM\OrderBy({"name": "ASC"})
-     * @Assert\Count(max="4", maxMessage="post.too_many_tags")
+     * @Assert\Count(max="4", maxMessage="Vous ne pouvez pas dépasser 4 tags pour un article")
      */
     private $tags;
 
