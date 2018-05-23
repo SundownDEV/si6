@@ -1,0 +1,38 @@
+{% extends '@admin/layout.html.twig' %}
+
+{% block title %}Liste des messages{% endblock %}
+
+{% block body_id 'admin_message_index' %}
+
+{% block main %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Company</th>
+                <th>Email</th>
+                <th>Numéro de tél.</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for message in messages %}
+            <tr>
+                <td>{{ message.Name }}</td>
+                <td>{{ message.Company }}</td>
+                <td>{{ message.Email }}</td>
+                <td>{{ message.phone }}</td>
+                <td>
+                    <a href="{{ path('admin_message_show', {'id': message.id}) }}" class="btn btn-xs btn-primary">Afficher</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">Aucun message à afficher</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('default_contact') }}">Create new</a>
+{% endblock %}

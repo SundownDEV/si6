@@ -11,25 +11,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Company;
+use App\Entity\Message;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method Company|null find($id, $lockMode = null, $lockVersion = null)
- * @method Company|null findOneBy(array $criteria, array $orderBy = null)
- * @method Company[]    findAll()
- * @method Company[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Message|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Message|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Message[]    findAll()
+ * @method Message[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CompanyRepository extends ServiceEntityRepository
+class MessageRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Company::class);
+        parent::__construct($registry, Message::class);
     }
 
     /**
-     * @return Company[] Returns an array of Company objects
+     * @return Message[] Returns an array of Message objects
      */
     public function findAllById(int $count = 10)
     {
@@ -38,14 +38,14 @@ class CompanyRepository extends ServiceEntityRepository
             ->setMaxResults($count)
             ->getQuery()
             ->getResult()
-            ;
+        ;
     }
 
     /*
-    public function findOneBySomeField($value): ?Company
+    public function findOneBySomeField($value): ?Message
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.exampleField = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()
