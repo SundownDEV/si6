@@ -18,11 +18,13 @@ use App\Service\FileUploader;
 use App\Utils\Slugger;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Controller used to manage articles in the backend.
@@ -130,9 +132,13 @@ class BlogController extends AbstractController
      *
      * @Route("/{id}/edit", requirements={"id": "\d+"}, methods={"GET", "POST"}, name="edit")
      */
-    public function edit(Request $request, Post $post, FileUploader $fileUploader): Response
+    public function edit(Request $request, Post $post, ContainerInterface $container): Response
     {
         $this->denyAccessUnlessGranted('edit', $post, 'Posts can only be edited by their authors.');
+
+        $post->setImage(
+            new File($container->getParameter('upload_dir').'/'.$post->getImage())
+        );
 
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);

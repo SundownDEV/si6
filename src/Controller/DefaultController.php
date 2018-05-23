@@ -7,6 +7,7 @@
  */
 
 namespace App\Controller;
+use App\Service\TwitterAPI;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -24,5 +25,17 @@ class DefaultController extends Controller
     public function index()
     {
         return $this->render('default/index.html.twig');
+    }
+
+    /**
+     * @Route("/test", name="index")
+     */
+    public function test()
+    {
+        $twitter = new TwitterAPI();
+
+        $t = $twitter->getUserTweets("sundowndev");
+
+        print_r($t[0]);
     }
 }

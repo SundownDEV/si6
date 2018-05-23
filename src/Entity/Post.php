@@ -101,10 +101,7 @@ class Post
      * @ORM\Column(type="string")
      *
      * @Assert\NotBlank(message="Please, upload the product brochure as a PDF file.")
-     * @Assert\File(
-     *     mimeTypes={"image/png" ,"image/jpg","image/jpeg"},
-     *     mimeTypesMessage="Veuillez insérer une image valide."
-     * )
+     * @Assert\Image()
      */
     private $image;
 
