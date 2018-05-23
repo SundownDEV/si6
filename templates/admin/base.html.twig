@@ -9,7 +9,9 @@
 
     <title>{% block title %}Dashboard{% endblock %} | Une année de Voyage</title>
 
-    {% block stylesheets %}{% endblock %}
+    {% block stylesheets %}
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    {% endblock %}
 </head>
 
 <body>
@@ -31,37 +33,37 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('admin_index') }}">
                             <span data-feather="home"></span>
-                            Dashboard
+                            <i class="fa fa-tachometer-alt"></i> Dashboard
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('admin_post_index') }}">
                             <span data-feather="file"></span>
-                            Articles
+                            <i class="fa fa-newspaper"></i> Articles
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('admin_company_index') }}">
                             <span data-feather="shopping-cart"></span>
-                            Companies aériennes
+                            <i class="fa fa-comments"></i> Companies aériennes
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('admin_company_index') }}">
                             <span data-feather="shopping-cart"></span>
-                            Partenaires
+                            <i class="fa fa-handshake"></i> Partenaires
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('admin_message_index') }}">
                             <span data-feather="shopping-cart"></span>
-                            Messages
+                            <i class="fa fa-envelope"></i> Messages
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('blog_index') }}" target="_blank">
                             <span data-feather="users"></span>
-                            Voir le site
+                            <i class="fa fa-external-link-alt"></i> Voir le site
                         </a>
                     </li>
                 </ul>
