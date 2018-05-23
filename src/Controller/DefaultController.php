@@ -48,7 +48,7 @@ class DefaultController extends Controller
             $em->persist($message);
             $em->flush();
 
-            return $this->redirectToRoute('admin_message_index');
+            return $this->redirectToRoute('default_contact');
         }
 
         return $this->render('default/contact/new.html.twig', [
