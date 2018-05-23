@@ -11,10 +11,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Comment;
 use App\Entity\Post;
 use App\Events;
-use App\Form\CommentType;
 use App\Repository\PostRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -29,10 +27,8 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Controller used to manage blog contents in the public part of the site.
  *
- * @Route("/")
- *
- * @author Ryan Weaver <weaverryan@gmail.com>
- * @author Javier Eguiluz <javier.eguiluz@gmail.com>
+ * @Route("/articles")
+ * @Security("has_role('ROLE_ADMIN') or has_role('ROLE_USER')")
  */
 class BlogController extends AbstractController
 {
