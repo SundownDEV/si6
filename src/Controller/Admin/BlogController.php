@@ -48,7 +48,7 @@ class BlogController extends AbstractController
      * @Route("/", methods={"GET"}, name="index")
      * @Route("/", methods={"GET"}, name="index")
      */
-    public function index(PostRepository $posts): Response
+        public function index(PostRepository $posts): Response
     {
         $authorPosts = $posts->findBy(['author' => $this->getUser()], ['publishedAt' => 'DESC']);
 

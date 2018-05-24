@@ -28,11 +28,11 @@ class TwitterAPI
      */
     public function __construct()
     {
-        $this->CONSUMER_KEY = '';
-        $this->CONSUMER_SECRET = '';
+        $this->CONSUMER_KEY = 'Pwc5xReQqYAfdYM5lp8cn7Ixq';
+        $this->CONSUMER_SECRET = 'Oqr79OW4fH1QvhWfiwvgNhElrzo3S6StUVTRDOlXqHHsgs7RSn';
 
-        $this->access_token = '';
-        $this->access_token_secret = '';
+        $this->access_token = '3374266624-Uy3urxdO2TYnjApidThMg4wtSN3jVIms1Qi4l9H';
+        $this->access_token_secret = 'STSJWzpeemZLbAvc61CTV9iuHiAOmdT60re9XQhMANjBF';
 
         $this->connection = new TwitterOAuth($this->CONSUMER_KEY, $this->CONSUMER_SECRET, $this->access_token, $this->access_token_secret);
     }

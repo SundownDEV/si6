@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Message;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -14,12 +15,13 @@ class MessageType extends AbstractType
     {
         $builder
             ->add('Status', ChoiceType::class, [
-                'choices'  => [
+                'label' => 'Vous êtes...',
+                'choices' => [
                     'Annonceur' => 'Annonceur',
                     'Journaliste' => 'Journaliste',
                     'Partenaire' => 'Partenaire',
                     'Lecteur' => 'Lecteur',
-                    'Office de Tourisme' => 'Office de Tourisme',
+                    'Office de tourisme' => 'Office de tourisme',
                 ],
             ])
             ->add('Company', null, [])

@@ -7,6 +7,7 @@
         <link rel="alternate" type="application/rss+xml" title="rss" href="{{ path('blog_rss') }}">
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
+            <link href="https://fonts.googleapis.com/css?family=Assistant:400,600|Playfair+Display:400,700" rel="stylesheet">
         {% endblock %}
 
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
@@ -14,52 +15,55 @@
 
     <body id="{% block body_id %}{% endblock %}">
 
+    <ul class="social-link">
+        <li class="social-link-img">
+            <a href="https://www.facebook.com/uneanneedevoyages/">
+                <img src="{{ asset('img/facebook.svg') }}" alt="facebook">
+            </a>
+        </li>
+        <li class="social-link-img">
+            <a href="https://twitter.com/1AnneeDeVoyages">
+                <img src="{{ asset('img/stickers-pictogramme-adhesif-twitter.svg') }}" alt="twitter">
+            </a>
+        </li>
+        <li class="social-link-img">
+            <a href="https://www.instagram.com/uneanneedevoyages/">
+                <img src="{{ asset('img/instagram_resized.svg') }}" alt="instagram">
+            </a>
+        </li>
+        <li class="social-link-img">
+            <a href="https://www.youtube.com/channel/UCESfTu2chDpHfGFkx-cfKDQ">
+                <img src="{{ asset('img/1_picto-youTube.svg') }}" alt="youtube">
+            </a>
+        </li>
+    </ul>
+
+    <div class="container">
     {#Block header qui sera commun à toutes les pages #}
         {% block header %}
             <header>
                 <div class="navbar navbar-default navbar-static-top">
+                    <div class="logo">
+                        <a href="{{ path('default_index') }}">
+                            <img src="{{ asset('img/logo.png') }}" width="32" alt="">
+                        </a>
+                    </div>
+
                     <div class="container-navbar">
                         <div class="navbar-header">
-                            <ul class="social-link">
-                                <li class="social-link-img">
-                                    <a href="https://www.facebook.com/uneanneedevoyages/">
-                                        <img src="{{ asset('img/facebook.svg') }}" alt="facebook">
-                                    </a>
-                                </li>
-                                <li class="social-link-img">
-                                    <a href="https://twitter.com/1AnneeDeVoyages">
-                                        <img src="{{ asset('img/stickers-pictogramme-adhesif-twitter.svg') }}" alt="twitter">
-                                    </a>
-                                </li>
-                                <li class="social-link-img">
-                                    <a href="https://www.instagram.com/uneanneedevoyages/">
-                                        <img src="{{ asset('img/instagram_resized.svg') }}" alt="instagram">
-                                    </a>
-                                </li>
-                                <li class="social-link-img">
-                                    <a href="https://www.youtube.com/channel/UCESfTu2chDpHfGFkx-cfKDQ">
-                                        <img src="{{ asset('img/1_picto-youTube.svg') }}" alt="youtube">
-                                    </a>
-                                </li>
-                            </ul>
                             <ul class ="navbar-header-list">
-                                <li class="navbar-header-item"><a href="">Articles</a></li>
-                                <li class="navbar-header-item"><a href="">Tops 100</a></li>
-                                <li class="navbar-header-item"><a href="">Fiches pratiques</a></li>
-                                <li class="navbar-header-item"><a href="">Mooks & abonnements</a></li>
-                                <li class="navbar-header-item"><a href="">Contacts</a></li>
+                                <li class="navbar-header-item"><a href="{{ path('blog_index') }}">Articles</a></li>
+                                <li class="navbar-header-item"><a href="{{ path('default_tops') }}">Tops 100</a></li>
+                                <li class="navbar-header-item"><a href="{{ path('default_fiches') }}">Fiches pratiques</a></li>
+                                <li class="navbar-header-item"><a href="{{ path('default_mooks') }}">Mooks & abonnements</a></li>
+                                <li class="navbar-header-item"><a href="{{ path('default_contact') }}">Contact</a></li>
                                 <li class="navbar-header-item">
                                     <div class="sidebar">
                                         <img src="{{ asset('img/search.svg') }}" alt="Recherchez !">
-                                        <input name="search"
-                                               type="text"
-                                               class="search-sidebar"
-                                               autocomplete="off"
-                                               autofocus
-                                        >
+                                        <input name="q" type="text" class="search-sidebar" autocomplete="off" autofocus>
                                     </div>
                                 </li>
-                                <a href="">
+                                <a href="{{ path('blog_index') }}">
                                     <li class="navbar-header-item-ruban">
                                         <img src="{{ asset ('img/ruban.png') }}" alt="Espace Membre">
                                     </li>
@@ -77,27 +81,28 @@
             {% block body %}
             {% endblock %}
         </div>
+    </div>
 
-        {#Block footer qui sera commun a toutes les pages #}
-        {% block footer %}
-            <footer>
-                <div class="container-footer">
-                    <ul class="list-info">
-                        <li>
-                            <a href="https://www.google.fr/maps/place/32+Rue+des+Peupliers,+92100+Boulogne-Billancourt/@48.833407,2.2534226,17z/data=!3m1!4b1!4m5!3m4!1s0x47e67a947d5880eb:0xc7063297d00ce3cf!8m2!3d48.833407!4d2.2556113">32, rue des Peupliers, 92100 Boulogne</a>
-                        </li>
-                        <li>
-                            <a href="+33(0)+33(0) 413 10 513">+33(0)+33(0) 413 10 513</a>
-                        </li>
-                        <li>
-                            <a href="rédaction@uneanneedevoyages.com">rédaction@uneanneedevoyages.com</a>
-                        </li>
-                        <li>Ouvert du lundi au vendredi de 10h à 18h</li>
-                    </ul>
-                    <p>Tous droits réservés Une Année De Voyages ©2018-2022</p>
-                </div>
-            </footer>
-        {% endblock %}
+    {#Block footer qui sera commun a toutes les pages #}
+    {% block footer %}
+        <footer>
+            <div class="container-footer">
+                <ul class="list-info">
+                    <li>
+                        <a href="https://www.google.fr/maps/place/32+Rue+des+Peupliers,+92100+Boulogne-Billancourt/@48.833407,2.2534226,17z/data=!3m1!4b1!4m5!3m4!1s0x47e67a947d5880eb:0xc7063297d00ce3cf!8m2!3d48.833407!4d2.2556113">32, rue des Peupliers, 92100 Boulogne  <span>•</span></a>
+                    </li>
+                    <li>
+                        <a href="tel:+3341310513">+33(0)+33(0) 413 10 513 <span>•</span></a>
+                    </li>
+                    <li>
+                        <a href="mailto:redaction@uneanneedevoyages.com">redaction@uneanneedevoyages.com <span>•</span></a>
+                    </li>
+                    <li>Ouvert du lundi au vendredi de 10h à 18h</li>
+                </ul>
+                <p>Tous droits réservés Une Année De Voyages ©2018-2022</p>
+            </div>
+        </footer>
+    {% endblock %}
 
         {% block javascripts %}
             <script src="{{ asset('build/manifest.js') }}"></script>
