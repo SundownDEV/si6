@@ -23,18 +23,18 @@ body {
 .social-link {
   position: fixed;
   left: 0;
-  display: flex;
   height: auto;
-  padding-left: 10px;
+  padding-left: 15px;
 
   &-img {
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
   }
 
   li {
     list-style: none;
-    display: inline-block;
+    display: block;
+    margin-bottom: 15px;
   }
 }
 
@@ -45,49 +45,57 @@ body {
 
 header {
   top: 0;
-  padding-top: 15px;
   background: #fff;
   position: fixed;
+  width: 100%;
 }
 
 footer {
 
 }
 
-.navbar-header {
-  display: flex;
-  &-list {
-    margin-left: 50px;
-    display: flex;
-  }
-  &-item {
-    margin-right: 40px;
-    a:link {
-      text-decoration: none;
-    }
-    a {
-      color: #000;
-    }
-    a:hover {
-      font-weight: bold;
-    }
+.navbar {
+  width: max-content;
 
-    .sidebar {
-      .search-sidebar {
-        border-top: none;
-        border-right: none;
-        border-left: none;
-        outline:0;
-        font-size: 15px;
-      }
-      img {
-        width: 20px;
-        height: auto;
-      }
+  .navbar-header {
+    display: flex;
+    &-list {
+      margin: 0;
+      display: flex;
     }
-    &-ruban {
-      top: -5px;
-      position: fixed;
+    &-item {
+      margin-right: 40px;
+      a:link {
+        text-decoration: none;
+      }
+      a {
+        color: #000;
+      }
+      a:hover {
+        font-weight: bold;
+      }
+
+      .sidebar {
+        .search-sidebar {
+          border-top: none;
+          border-right: none;
+          border-left: none;
+          outline: 0;
+          font-size: 15px;
+        }
+        img {
+          width: 20px;
+          height: auto;
+        }
+      }
+      &-ruban {
+        top: -5px;
+        position: fixed;
+
+        img {
+          width: 75px;
+        }
+      }
     }
   }
 }
@@ -95,6 +103,7 @@ footer {
 .anneeVoyages {
   display: flex;
   flex-direction: column;
+
   .container-img {
     width: 1058px;
     height: 486px;
@@ -126,6 +135,7 @@ footer {
 
       p {
         font-size: 25px;
+        margin-top: 20px;
       }
     }
   }
