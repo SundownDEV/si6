@@ -1,0 +1,41 @@
+{% extends '@admin/layout.html.twig' %}
+
+{% block title %}Liste des partenaires{% endblock %}
+
+{% block body_id 'admin_partner_index' %}
+
+{% block buttons %}
+    <div class="btn-group mr-2">
+        <a href="{{ path('admin_partner_new') }}" class="btn btn-sm btn-outline-secondary">Ajouter un partenaire</a>
+    </div>
+{% endblock %}
+
+{% block main %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Link</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for partner in partners %}
+            <tr>
+                <td>{{ partner.name }}</td>
+                <td><img src="{{ asset('uploads/') ~ partner.image }}" alt=""></td>
+                <td>{{ partner.link }}</td>
+                <td>
+                    <a href="{{ path('admin_partner_show', {'id': partner.id}) }}">Afficher</a>
+                    <a href="{{ path('admin_partner_edit', {'id': partner.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Aucun partenaire trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

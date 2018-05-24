@@ -1,0 +1,11 @@
+{% extends '@admin/layout.html.twig' %}
+
+{% block title %}Ajouter un partenaire{% endblock %}
+
+{% block main %}
+    {{ include('@admin/partner/_form.html.twig') }}
+
+    <hr>
+
+    <a href="{{ path('admin_partner_index') }}" class="btn btn-primary">Retour à la liste</a>
+{% endblock %}
