@@ -58,7 +58,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/test", name="index")
+     * @Route("/test", name="test")
      */
     public function test()
     {
