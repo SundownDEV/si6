@@ -14,49 +14,57 @@
 
     <body id="{% block body_id %}{% endblock %}">
 
+    {#Block header qui sera commun à toutes les pages #}
         {% block header %}
             <header>
-                <div class="navbar navbar-default navbar-static-top" role="navigation">
-                    <div class="container">
-                        <div class="navbar-header col-md-3 col-lg-2">
-                            <a class="navbar-brand" href="{{ path('blog_index') }}">
-                                Une Année de Voyage
-                            </a>
-
-                            <button type="button" class="navbar-toggle"
-                                    data-toggle="collapse"
-                                    data-target=".navbar-collapse">
-                                <span class="sr-only">Toggle</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                        </div>
-                        <div class="">
-                            <ul class="nav navbar-nav navbar-right">
-                                {% block header_navigation_links %}
-                                    {% if is_granted('ROLE_ADMIN') %}
-                                        <li>
-                                            <a href="{{ path('admin_post_index') }}">
-                                                <i class="fa fa-lock" aria-hidden="true"></i> Back office
-                                            </a>
-                                        </li>
-                                    {% endif %}
-                                {% endblock %}
-
-                                {% if app.user %}
-                                    <li>
-                                        <a href="{{ logout_url('main') }}">
-                                            <i class="fa fa-sign-out" aria-hidden="true"></i> Déconnexion
-                                        </a>
+                <div class="navbar navbar-default navbar-static-top">
+                    <div class="container-navbar">
+                        <div class="navbar-header">
+                            <ul class="social-link">
+                                <li class="social-link-img">
+                                    <a href="https://www.facebook.com/uneanneedevoyages/">
+                                        <img src="{{ asset('img/facebook.svg') }}" alt="facebook">
+                                    </a>
+                                </li>
+                                <li class="social-link-img">
+                                    <a href="https://twitter.com/1AnneeDeVoyages">
+                                        <img src="{{ asset('img/stickers-pictogramme-adhesif-twitter.svg') }}" alt="twitter">
+                                    </a>
+                                </li>
+                                <li class="social-link-img">
+                                    <a href="https://www.instagram.com/uneanneedevoyages/">
+                                        <img src="{{ asset('img/instagram_resized.svg') }}" alt="instagram">
+                                    </a>
+                                </li>
+                                <li class="social-link-img">
+                                    <a href="https://www.youtube.com/channel/UCESfTu2chDpHfGFkx-cfKDQ">
+                                        <img src="{{ asset('img/1_picto-youTube.svg') }}" alt="youtube">
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class ="navbar-header-list">
+                                <li class="navbar-header-item"><a href="">Articles</a></li>
+                                <li class="navbar-header-item"><a href="">Tops 100</a></li>
+                                <li class="navbar-header-item"><a href="">Fiches pratiques</a></li>
+                                <li class="navbar-header-item"><a href="">Mooks & abonnements</a></li>
+                                <li class="navbar-header-item"><a href="">Contacts</a></li>
+                                <li class="navbar-header-item">
+                                    <div class="sidebar">
+                                        <img src="{{ asset('img/search.svg') }}" alt="Recherchez !">
+                                        <input name="search"
+                                               type="text"
+                                               class="search-sidebar"
+                                               autocomplete="off"
+                                               autofocus
+                                        >
+                                    </div>
+                                </li>
+                                <a href="">
+                                    <li class="navbar-header-item-ruban">
+                                        <img src="{{ asset ('img/ruban.png') }}" alt="Espace Membre">
                                     </li>
-                                {% else %}
-                                    <li>
-                                        <a href="{{ path('security_login') }}">
-                                            <i class="fa fa-sign-in" aria-hidden="true"></i> Connexion
-                                        </a>
-                                    </li>
-                                {% endif %}
+                                </a>
+
                             </ul>
                         </div>
                     </div>
@@ -65,35 +73,28 @@
         {% endblock %}
 
         <div class="container body-container">
+            {#Block qui aura les contenus uniques de chaque page #}
             {% block body %}
-                <div class="row">
-                    <div id="main" class="col-sm-9">
-                        {{ include('default/_flash_messages.html.twig') }}
-
-                        {% block main %}{% endblock %}
-                    </div>
-
-                    <div id="sidebar" class="col-sm-3">
-                        {% block sidebar %}
-                            {{ render_esi(controller('Symfony\\Bundle\\FrameworkBundle\\Controller\\TemplateController::templateAction', {
-                                'template': 'blog/about.html.twig',
-                                'sharedAge': 600,
-                                '_locale': app.request.locale
-                            })) }}
-                        {% endblock %}
-                    </div>
-                </div>
             {% endblock %}
         </div>
 
+        {#Block footer qui sera commun a toutes les pages #}
         {% block footer %}
             <footer>
-                <div class="container">
-                    <div class="row">
-                        <div id="footer-copyright" class="col-md-6">
-                            <p>&copy; {{ 'now'|date('Y') }} - The Symfony Project</p>
-                        </div>
-                    </div>
+                <div class="container-footer">
+                    <ul class="list-info">
+                        <li>
+                            <a href="https://www.google.fr/maps/place/32+Rue+des+Peupliers,+92100+Boulogne-Billancourt/@48.833407,2.2534226,17z/data=!3m1!4b1!4m5!3m4!1s0x47e67a947d5880eb:0xc7063297d00ce3cf!8m2!3d48.833407!4d2.2556113">32, rue des Peupliers, 92100 Boulogne</a>
+                        </li>
+                        <li>
+                            <a href="+33(0)+33(0) 413 10 513">+33(0)+33(0) 413 10 513</a>
+                        </li>
+                        <li>
+                            <a href="rédaction@uneanneedevoyages.com">rédaction@uneanneedevoyages.com</a>
+                        </li>
+                        <li>Ouvert du lundi au vendredi de 10h à 18h</li>
+                    </ul>
+                    <p>Tous droits réservés Une Année De Voyages ©2018-2022</p>
                 </div>
             </footer>
         {% endblock %}
