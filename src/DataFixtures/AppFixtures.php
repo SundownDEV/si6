@@ -129,7 +129,16 @@ class AppFixtures extends Fixture
     {
         return [
             'Lorem ipsum dolor sit amet consectetur adipiscing elit',
+            'Lorem ipsum dolor sit amet consectetur adipiscing elit',
+            'Lorem ipsum dolor sit amet consectetur adipiscing elit',
+            'Lorem ipsum dolor sit amet consectetur adipiscing elit',
             'Pellentesque vitae velit ex',
+            'Pellentesque vitae velit ex',
+            'Pellentesque vitae velit ex',
+            'Pellentesque vitae velit ex',
+            'Mauris dapibus risus quis suscipit vulputate',
+            'Mauris dapibus risus quis suscipit vulputate',
+            'Mauris dapibus risus quis suscipit vulputate',
             'Mauris dapibus risus quis suscipit vulputate',
         ];
     }

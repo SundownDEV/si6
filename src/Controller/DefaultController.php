@@ -58,14 +58,14 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/test", name="index")
+     * @Route("/test", name="test")
      */
     public function test()
     {
         $twitter = new TwitterAPI();
 
-        $t = $twitter->getUserTweets('sundowndev');
+        $t = $twitter->getUserLastTweet('sundowndev');
 
-        print_r($t[0]);
+        return $t->text;
     }
 }
