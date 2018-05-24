@@ -7,6 +7,7 @@
         <link rel="alternate" type="application/rss+xml" title="rss" href="{{ path('blog_rss') }}">
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
+            <link href="https://fonts.googleapis.com/css?family=Assistant:400,600|Playfair+Display:400,700" rel="stylesheet">
         {% endblock %}
 
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
@@ -14,52 +15,49 @@
 
     <body id="{% block body_id %}{% endblock %}">
 
+    <ul class="social-link">
+        <li class="social-link-img">
+            <a href="https://www.facebook.com/uneanneedevoyages/">
+                <img src="{{ asset('img/facebook.svg') }}" alt="facebook">
+            </a>
+        </li>
+        <li class="social-link-img">
+            <a href="https://twitter.com/1AnneeDeVoyages">
+                <img src="{{ asset('img/stickers-pictogramme-adhesif-twitter.svg') }}" alt="twitter">
+            </a>
+        </li>
+        <li class="social-link-img">
+            <a href="https://www.instagram.com/uneanneedevoyages/">
+                <img src="{{ asset('img/instagram_resized.svg') }}" alt="instagram">
+            </a>
+        </li>
+        <li class="social-link-img">
+            <a href="https://www.youtube.com/channel/UCESfTu2chDpHfGFkx-cfKDQ">
+                <img src="{{ asset('img/1_picto-youTube.svg') }}" alt="youtube">
+            </a>
+        </li>
+    </ul>
+
+    <div class="container">
     {#Block header qui sera commun à toutes les pages #}
         {% block header %}
             <header>
                 <div class="navbar navbar-default navbar-static-top">
                     <div class="container-navbar">
                         <div class="navbar-header">
-                            <ul class="social-link">
-                                <li class="social-link-img">
-                                    <a href="https://www.facebook.com/uneanneedevoyages/">
-                                        <img src="{{ asset('img/facebook.svg') }}" alt="facebook">
-                                    </a>
-                                </li>
-                                <li class="social-link-img">
-                                    <a href="https://twitter.com/1AnneeDeVoyages">
-                                        <img src="{{ asset('img/stickers-pictogramme-adhesif-twitter.svg') }}" alt="twitter">
-                                    </a>
-                                </li>
-                                <li class="social-link-img">
-                                    <a href="https://www.instagram.com/uneanneedevoyages/">
-                                        <img src="{{ asset('img/instagram_resized.svg') }}" alt="instagram">
-                                    </a>
-                                </li>
-                                <li class="social-link-img">
-                                    <a href="https://www.youtube.com/channel/UCESfTu2chDpHfGFkx-cfKDQ">
-                                        <img src="{{ asset('img/1_picto-youTube.svg') }}" alt="youtube">
-                                    </a>
-                                </li>
-                            </ul>
                             <ul class ="navbar-header-list">
-                                <li class="navbar-header-item"><a href="">Articles</a></li>
+                                <li class="navbar-header-item"><a href="{{ path('blog_index') }}">Articles</a></li>
                                 <li class="navbar-header-item"><a href="">Tops 100</a></li>
                                 <li class="navbar-header-item"><a href="">Fiches pratiques</a></li>
                                 <li class="navbar-header-item"><a href="">Mooks & abonnements</a></li>
-                                <li class="navbar-header-item"><a href="">Contacts</a></li>
+                                <li class="navbar-header-item"><a href="{{ path('default_contact') }}">Contact</a></li>
                                 <li class="navbar-header-item">
                                     <div class="sidebar">
                                         <img src="{{ asset('img/search.svg') }}" alt="Recherchez !">
-                                        <input name="search"
-                                               type="text"
-                                               class="search-sidebar"
-                                               autocomplete="off"
-                                               autofocus
-                                        >
+                                        <input name="search" type="text" class="search-sidebar" autocomplete="off" autofocus>
                                     </div>
                                 </li>
-                                <a href="">
+                                <a href="{{ path('blog_index') }}">
                                     <li class="navbar-header-item-ruban">
                                         <img src="{{ asset ('img/ruban.png') }}" alt="Espace Membre">
                                     </li>
@@ -98,6 +96,7 @@
                 </div>
             </footer>
         {% endblock %}
+    </div>
 
         {% block javascripts %}
             <script src="{{ asset('build/manifest.js') }}"></script>
