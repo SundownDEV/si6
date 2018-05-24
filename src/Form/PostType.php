@@ -66,6 +66,7 @@ class PostType extends AbstractType
             ->add('image', FileType::class, [
                 'label' => 'Image de couverture (jpg, png)',
                 'required' => false,
+                'attr' => ['class' => 'form-control']
             ])
         ;
     }
