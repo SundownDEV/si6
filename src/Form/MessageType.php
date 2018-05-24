@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class MessageType extends AbstractType
 {
@@ -23,21 +24,11 @@ class MessageType extends AbstractType
                     'Office de tourisme' => 'Office de tourisme',
                 ],
             ])
-            ->add('Company', null, [
-                'label' => 'Entreprise'
-            ])
-            ->add('Name', null, [
-                'label' => 'Nom'
-            ])
-            ->add('Email', null, [
-                'label' => 'Adresse email'
-            ])
-            ->add('phone', null, [
-                'label' => 'Numéro de téléphone'
-            ])
-            ->add('message', null, [
-                'label' => 'Message'
-            ])
+            ->add('Company', null, [])
+            ->add('Name', null, [])
+            ->add('Email', null, [])
+            ->add('phone', null, [])
+            ->add('message', null, [])
         ;
     }
 

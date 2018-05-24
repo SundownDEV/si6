@@ -80,9 +80,11 @@ class BlogController extends AbstractController
         // However, we explicitly add it to improve code readability.
         // See https://symfony.com/doc/current/best_practices/forms.html#handling-form-submits
         if ($form->isSubmitted() && $form->isValid()) {
-            $post->setSlug(Slugger::slugify($post->getTitle()));
+            $post->setSlug(Slugger::slugify($post->getTitle().'-'.rand(1, 100)));
 
-            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
+            /**
+             * @var Symfony\Component\HttpFoundation\File\UploadedFile $file
+             */
             $file = $post->getImage();
             $fileName = $fileUploader->upload($file);
 
@@ -92,10 +94,6 @@ class BlogController extends AbstractController
             $em->persist($post);
             $em->flush();
 
-            // Flash messages are used to notify the user about the result of the
-            // actions. They are deleted automatically from the session as soon
-            // as they are accessed.
-            // See https://symfony.com/doc/current/book/controller.html#flash-messages
             $this->addFlash('success', 'Article créé avec succès');
 
             if ($form->get('saveAndCreateNew')->isClicked()) {
@@ -132,14 +130,19 @@ class BlogController extends AbstractController
      *
      * @Route("/{id}/edit", requirements={"id": "\d+"}, methods={"GET", "POST"}, name="edit")
      */
-    public function edit(Request $request, Post $post, ContainerInterface $container): Response
+    public function edit(Request $request, Post $post, FileUploader $fileUploader): Response
     {
         $this->denyAccessUnlessGranted('edit', $post, 'Posts can only be edited by their authors.');
-        
+
+        $fileName = $post->getImage();
+        $image = new File($fileUploader->getTargetDirectory() . '/' . $post->getImage());
+        $post->setImage($image);
+
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $post->setImage($fileName);
             $post->setSlug(Slugger::slugify($post->getTitle()));
 
             $this->getDoctrine()->getManager()->flush();
@@ -164,7 +167,7 @@ class BlogController extends AbstractController
      * The Security annotation value is an expression (if it evaluates to false,
      * the authorization mechanism will prevent the user accessing this resource).
      */
-    public function delete(Request $request, Post $post, Filesystem $filesystem): Response
+    public function delete(Request $request, Post $post, Filesystem $filesystem, FileUploader $fileUploader): Response
     {
         if (!$this->isCsrfTokenValid('delete', $request->request->get('token'))) {
             return $this->redirectToRoute('admin_post_index');
@@ -176,7 +179,7 @@ class BlogController extends AbstractController
         $post->getTags()->clear();
 
         // Remove post image
-        $filesystem->remove(['symlink', '/var/www/si6/public/uploads/'.$post->getImage()]);
+        $filesystem->remove(['symlink', $fileUploader->getTargetDirectory().$post->getImage()]);
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($post);

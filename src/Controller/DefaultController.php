@@ -111,8 +111,8 @@ class DefaultController extends Controller
     {
         $twitter = new TwitterAPI();
 
-        $t = $twitter->getUserTweets('sundowndev');
+        $t = $twitter->getUserLastTweet('sundowndev');
 
-        print_r($t[0]);
+        return $t->text;
     }
 }
