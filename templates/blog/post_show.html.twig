@@ -2,12 +2,16 @@
 
 {% block body_id 'blog_post_show' %}
 
-{% block main %}
+{% block body %}
+    <div>
+        <img src="{{ asset('uploads/') ~ post.image }}" width="100%" alt="">
+    </div>
+    
     <h1>{{ post.title }}</h1>
 
     <p class="post-metadata">
-        <span class="metadata"><i class="fa fa-calendar"></i> {{ post.publishedAt|localizeddate('long', 'medium', null, 'UTC') }}</span>
-        <span class="metadata"><i class="fa fa-user"></i> {{ post.author.fullName }}</span>
+        <span class="metadata"><i class="fa fa-calendar"></i> {{ post.publishedAt|localizeddate('long', 'none', app.request.locale) }}</span>
+        <span class="metadata"><i class="fa fa-user"></i> Par {{ post.author.fullName }}</span>
     </p>
 
     {{ post.content|md2html }}

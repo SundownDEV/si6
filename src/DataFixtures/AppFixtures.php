@@ -76,7 +76,7 @@ class AppFixtures extends Fixture
             $post->setPublishedAt($publishedAt);
             $post->setAuthor($author);
             $post->addTag(...$tags);
-            $post->setImage('test.jpg');
+            $post->setImage('article.jpg');
 
             $manager->persist($post);
         }

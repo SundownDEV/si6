@@ -142,59 +142,56 @@
     <section class="landing-annonceur-section">
         <h2 class="section-title">Annonceurs ... Affichez-vous !</h2>
         <div class="barre"></div>
-        <div class="carousel-wrap">
-            <div>
-                <img src="" alt="">
-            </div>
-            <div>
-                <img src="" alt="">
-            </div>
-            <div>
-                <img src="" alt="">
-            </div>
-            <div>
-                <img src="" alt="">
-            </div>
-        </div>
 
-        <div class="previous-annonceur">
-            <img src="" alt="">
-        </div>
-        <div class="next-annonceur">
-            <img src="" alt="">
+        <div class="twitter-feed">
+            {% for tweet in tweets|slice(0, 3) %}
+                <div class="tweet">
+                    <div class="avatar">
+                        <img src="{{ tweet.user.profile_image_url }}" alt="">
+                        <h2>{{ tweet.user.name }} <small>le {{ tweet.created_at|date("d/m") }} à {{ tweet.created_at|date("m:s") }}</small></h2>
+                    </div>
+
+                    <p>{{ tweet.text }}</p>
+                </div>
+            {% endfor %}
         </div>
     </section>
 
     <section class="newsair">
-        <h2>NEWS AIR</h2>
+        <h2 class="section-title">ARTICLES</h2>
 
         <div class="container-news">
-            <div></div>
-            <div></div>
-            <div></div>
+            {% for post in posts|slice(0, 3) %}
+                <div><a href="{{ path('blog_post', {slug: post.slug}) }}"><img src="{{ asset('uploads/') ~ post.image }}" width="305" height="auto" alt=""></a></div>
+            {% endfor %}
         </div>
-        <a href="">Voir toutes les News Air</a>
-        <div></div>
-        {#twitter actu#}
+
+        <a href="{{ path('blog_index') }}">Voir toutes les catégories d’articles</a>
     </section>
 
     <section class="equipe">
+        <h2 class="section-title">L'équipe</h2>
+
         <div class="container-equipe">
             <div>
-                <img src="" alt="">
-                <p></p>
+                <img src="{{ asset('img/team1.png') }}" alt="">
+                <p class="team-name">Judith Lossmann</p>
+                <p>Fondatrice<br>Rédactrice en chef</p>
             </div>
             <div>
-                <img src="" alt="">
-                <p></p>
+                <img src="{{ asset('img/team2.png') }}" alt="">
+                <p class="team-name">Judith Lossmann</p>
+                <p>Fondatrice<br>Rédactrice en chef</p>
             </div>
             <div>
-                <img src="" alt="">
-                <p></p>
+                <img src="{{ asset('img/team3.png') }}" alt="">
+                <p class="team-name">Judith Lossmann</p>
+                <p>Fondatrice<br>Rédactrice en chef</p>
             </div>
             <div>
-                <img src="" alt="">
-                <p></p>
+                <img src="{{ asset('img/team4.png') }}" alt="">
+                <p class="team-name">Judith Lossmann</p>
+                <p>Fondatrice<br>Rédactrice en chef</p>
             </div>
         </div>
     </section>

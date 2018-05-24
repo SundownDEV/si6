@@ -11,6 +11,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Post;
+use App\Repository\CompanyRepository;
 use App\Service\TwitterAPI;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,6 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Message;
 use Symfony\Component\HttpFoundation\Response;
 use App\Form\MessageType;
+use App\Repository\PostRepository;
 
 /**
  * Class DefaultController.
@@ -29,9 +32,51 @@ class DefaultController extends Controller
     /**
      * @Route("/", name="index")
      */
-    public function index()
+    public function index(PostRepository $posts, CompanyRepository $company, TwitterAPI $twitterAPI): Response
     {
-        return $this->render('default/index.html.twig');
+        $companies = $company->findAll();
+        $tweets = [];
+
+        foreach ($companies as $company) {
+            if (count($tweets) < 3 && !is_null($tweet = $twitterAPI->getUserLastTweet($company->getTwitter()))) {
+                $tweets[] = $tweet;
+            }
+        }
+
+        return $this->render('default/index.html.twig', [
+            'posts' => $posts->findLatest(),
+            'tweets' => $tweets,
+        ]);
+    }
+
+    /**
+     * @Route("/places", name="tops")
+     */
+    public function tops(PostRepository $posts): Response
+    {
+        return $this->render('default/tops.html.twig', [
+            'posts' => $posts->findLatest()
+        ]);
+    }
+
+    /**
+     * @Route("/fiches", name="fiches")
+     */
+    public function fiches(PostRepository $posts): Response
+    {
+        return $this->render('default/fiches.html.twig', [
+            'posts' => $posts->findLatest()
+        ]);
+    }
+
+    /**
+     * @Route("/mooks", name="mooks")
+     */
+    public function mooks(PostRepository $posts): Response
+    {
+        return $this->render('default/mooks.html.twig', [
+            'posts' => $posts->findLatest()
+        ]);
     }
 
     /**
@@ -47,6 +92,8 @@ class DefaultController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($message);
             $em->flush();
+
+            $this->addFlash('success', 'Votre message a bien été envoyé');
 
             return $this->redirectToRoute('default_contact');
         }

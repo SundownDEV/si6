@@ -57,7 +57,7 @@ class Post
     /**
      * @var string
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="text")
      * @Assert\NotBlank(message="Veuillez entrer un extrait")
      */
     private $summary;

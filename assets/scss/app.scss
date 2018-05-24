@@ -16,8 +16,9 @@ li {
 
 body {
   font-family: 'Assistant', sans-serif;
+  margin: 0;
+  padding: 0;
   padding-top: 150px;
-  padding-left: 50px;
 }
 
 .social-link {
@@ -41,6 +42,7 @@ body {
 .container {
   width: 1080px;
   margin: auto;
+  min-height: 50vh;
 }
 
 header {
@@ -48,10 +50,28 @@ header {
   background: #fff;
   position: fixed;
   width: 100%;
+  z-index: 999;
 }
 
 footer {
+  width: 100%;
+  background-color: #bcb38f;
+  padding: 50px;
+  text-align: center;
+  margin-top: 100px;
+  font-style: 18px;
 
+  .container-footer {
+    ul li {
+      display: inline-block;
+      font-weight: bold;
+      opacity: 0.5;
+
+      &,a {
+        color: #000000;
+      }
+    }
+  }
 }
 
 .navbar {
@@ -219,5 +239,64 @@ footer {
 }
 
 .landing-annonceur-section {
-  margin-top: 100px;
+  margin: 100px 0;
+
+  .twitter-feed .tweet {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+    padding: 25px;
+    margin-top: 50px;
+
+    img {
+      float: left;
+      margin-right: 15px;
+    }
+  }
+}
+
+.carousel {
+  width: 200px;
+  overflow: hidden;
+  margin: auto;
+}
+
+.carousel-wrap {
+  display: flex;
+  flex-wrap: nowrap;
+  transition: all 0.8s;
+}
+
+.carousel-wrap img {
+  display: block;
+  width: 400px;
+  height: 200px;
+}
+
+.newsair {
+  margin-bottom: 100px;
+
+  .container-news {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+  }
+
+  a {
+    font-size: 20px;
+    text-decoration: underline;
+    color: #000;
+  }
+}
+
+.equipe {
+  .container-equipe {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+
+    p.team-name {
+      margin-top: 30px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+  }
 }
