@@ -19,13 +19,13 @@ class PartnerType extends AbstractType
             ->add('name', null, [
                 'label' => 'Nom',
             ])
+            ->add('link', null, [
+                'label' => 'Lien du site',
+            ])
             ->add('image', FileType::class, [
                 'label' => 'Logo à afficher',
                 'required' => false,
                 'attr' => ['class' => 'form-control']
-            ])
-            ->add('link', null, [
-                'label' => 'Lien du site',
             ])
         ;
     }

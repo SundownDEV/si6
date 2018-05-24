@@ -23,19 +23,40 @@ class TwitterAPI
 
     private $connection;
 
+    /**
+     * TwitterAPI constructor.
+     */
     public function __construct()
     {
-        $this->CONSUMER_KEY = '';
-        $this->CONSUMER_SECRET = '';
+        $this->CONSUMER_KEY = 'Z7epGy8kaHGRTGUI3KJ761SGP';
+        $this->CONSUMER_SECRET = 'uCVsPXfc87P5xPdPJ6mbXHwprCDRehJ3WZzmXzPLrgxDd2if4F';
 
-        $this->access_token = '';
-        $this->access_token_secret = '';
+        $this->access_token = '3374266624-Uy3urxdO2TYnjApidThMg4wtSN3jVIms1Qi4l9H';
+        $this->access_token_secret = 'STSJWzpeemZLbAvc61CTV9iuHiAOmdT60re9XQhMANjBF';
 
         $this->connection = new TwitterOAuth($this->CONSUMER_KEY, $this->CONSUMER_SECRET, $this->access_token, $this->access_token_secret);
     }
 
+    /**
+     * @param string $username
+     * @param bool $exclude_replies
+     * @return null
+     */
+    public function getUserLastTweet(string $username, bool $exclude_replies = true)
+    {
+        $tweet = $this->connection->get('statuses/user_timeline', ['screen_name' => $username, 'count' => 1, 'exclude_replies' => $exclude_replies]);
+        return $tweet[0] ?? null;
+    }
+
+    /**
+     * @param string $username
+     * @param int $count
+     * @param bool $exclude_replies
+     * @return array|null|object
+     */
     public function getUserTweets(string $username, int $count = 1, bool $exclude_replies = true)
     {
-        return $this->connection->get('statuses/user_timeline', ['screen_name' => $username, 'count' => $count, 'exclude_replies' => $exclude_replies]);
+        $tweets = $this->connection->get('statuses/user_timeline', ['screen_name' => $username, 'count' => $count, 'exclude_replies' => $exclude_replies]);
+        return $tweets ?? null;
     }
 }
