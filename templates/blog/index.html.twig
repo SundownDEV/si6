@@ -2,27 +2,37 @@
 
 {% block body_id 'blog_index' %}
 
-{% block main %}
-    {% for post in posts %}
-        <article class="post">
-            <h2>
-                <a href="{{ path('blog_post', {slug: post.slug}) }}">
-                    {{ post.title }}
-                </a>
-            </h2>
+{% block body %}
+    <section class="newsair">
+        <h2 class="section-title">ARTICLES</h2>
 
-            <p class="post-metadata">
-                <span class="metadata"><i class="fa fa-calendar"></i> {{ post.publishedAt|localizeddate('long', 'medium', null, 'UTC') }}</span>
-                <span class="metadata"><i class="fa fa-user"></i> {{ post.author.fullName }}</span>
-            </p>
+        {% for post in posts %}
+            <article class="post">
+                <div class="post-image">
+                    <a href="{{ path('blog_post', {slug: post.slug}) }}"><img src="{{ asset('uploads/') ~ post.image }}" width="400" alt=""></a>
+                </div>
+                
+                <h2>
+                    <a href="{{ path('blog_post', {slug: post.slug}) }}">
+                        {{ post.title }}
+                    </a>
+                </h2>
 
-            {{ post.summary|md2html }}
+                <p class="post-metadata">
+                    <span class="metadata"><i class="fa fa-calendar"></i> {{ post.publishedAt|localizeddate('long', 'medium', null, 'UTC') }}</span>
+                    <span class="metadata"><i class="fa fa-user"></i> {{ post.author.fullName }}</span>
+                </p>
 
-            {{ include('blog/_post_tags.html.twig') }}
-        </article>
-    {% else %}
-        <div class="well">{{ 'post.no_posts_found'|trans }}</div>
-    {% endfor %}
+                {{ post.summary|md2html }}
+
+                {{ include('blog/_post_tags.html.twig') }}
+
+                <hr>
+            </article>
+        {% else %}
+            <div class="well">{{ 'post.no_posts_found'|trans }}</div>
+        {% endfor %}
+    </section>
 
     {% if posts.haveToPaginate %}
         <div class="navigation text-center">

@@ -2,6 +2,8 @@
 
 {% block title %}Nous contacter{% endblock %}
 
-{% block main %}
+{% block body %}
+    {{ include('default/_flash_messages.html.twig') }}
+
     {{ include('default/contact/_form.html.twig') }}
 {% endblock %}
