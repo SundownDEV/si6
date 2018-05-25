@@ -37,15 +37,15 @@ class FicheController extends Controller
         $form = $this->createForm(FicheType::class, $fiche);
         $form->handleRequest($request);
 
-        /**
-         * @var Symfony\Component\HttpFoundation\File\UploadedFile $file
-         */
-        $file = $fiche->getImage();
-        $fileName = $fileUploader->upload($file);
-
-        $fiche->setImage($fileName);
-
         if ($form->isSubmitted() && $form->isValid()) {
+            /**
+             * @var Symfony\Component\HttpFoundation\File\UploadedFile $file
+             */
+            $file = $fiche->getImage();
+            $fileName = $fileUploader->upload($file);
+
+            $fiche->setImage($fileName);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($fiche);
             $em->flush();

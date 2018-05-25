@@ -36,15 +36,19 @@ class FicheRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Fiche
+    /**
+     * @param $value
+     * @return Fiche|null
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function findAllCities()
     {
         return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
+            ->select('f.city')
+            ->distinct()
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getResult()
         ;
     }
-    */
+
 }

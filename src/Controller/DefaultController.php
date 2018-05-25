@@ -13,6 +13,7 @@ namespace App\Controller;
 
 use App\Entity\Post;
 use App\Repository\CompanyRepository;
+use App\Repository\FicheRepository;
 use App\Repository\PartnerRepository;
 use App\Repository\PlaceRepository;
 use App\Service\TwitterAPI;
@@ -62,10 +63,10 @@ class DefaultController extends Controller
     /**
      * @Route("/fiches", name="fiches")
      */
-    public function fiches(PostRepository $posts): Response
+    public function fiches(FicheRepository $fiche): Response
     {
         return $this->render('default/fiches.html.twig', [
-            'posts' => $posts->findLatest()
+            'cities' => $fiche->findAllCities()
         ]);
     }
 

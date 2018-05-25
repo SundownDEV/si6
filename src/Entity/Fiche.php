@@ -74,7 +74,7 @@ class Fiche
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $country;
+    private $city;
 
     public function getId()
     {
@@ -213,14 +213,14 @@ class Fiche
         return $this;
     }
 
-    public function getCountry(): ?string
+    public function getCity(): ?string
     {
-        return $this->country;
+        return $this->city;
     }
 
-    public function setCountry(string $country): self
+    public function setCity(string $city): self
     {
-        $this->country = $country;
+        $this->city = $city;
 
         return $this;
     }

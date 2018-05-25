@@ -13,9 +13,13 @@ class FicheType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $entity = $builder->getData();
-
         $builder
+            ->add('city', ChoiceType::class, [
+                'label' => 'Ville',
+                'choices' => [
+                    'New York City' => 'New York City','Los Angeles' => 'Los Angeles','Beijing' => 'Beijing','Delhi' => 'Delhi','Shanghai' => 'Shanghai','Paris' => 'Paris','Istanbul' => 'Istanbul','Tokyo' => 'Tokyo','Guangzhou' => 'Guangzhou','Mumbai' => 'Mumbai','Moscow' => 'Moscow','São Paulo' => 'São Paulo','Shenzhen' => 'Shenzhen','Jakarta' => 'Jakarta','Lahore' => 'Lahore','Seoul' => 'Seoul','Wuhan' => 'Wuhan','Kinshasa' => 'Kinshasa','Cairo' => 'Cairo','Mexico City' => 'Mexico City','Lima' => 'Lima','London' => 'London','Lagos' => 'Lagos','Bengaluru' => 'Bengaluru','Bangkok' => 'Bangkok','Ho Chi Minh City' => 'Ho Chi Minh City','Dongguan' => 'Dongguan','Chongqing' => 'Chongqing','Nanjing' => 'Nanjing','Tehran' => 'Tehran','Shenyang' => 'Shenyang','Bogotá' => 'Bogotá','Ningbo' => 'Ningbo','Hong Kong' => 'Hong Kong','Hanoi' => 'Hanoi','Baghdad' => 'Baghdad','Changsha' => 'Changsha','Dhaka' => 'Dhaka','Hyderabad' => 'Hyderabad','Chennai' => 'Chennai','Rio de Janeiro' => 'Rio de Janeiro','Faisalabad' => 'Faisalabad','Foshan' => 'Foshan','Zunyi' => 'Zunyi','Santiago' => 'Santiago','Riyadh' => 'Riyadh','Ahmedabad' => 'Ahmedabad','Singapore' => 'Singapore','Shantou' => 'Shantou','Saint Petersburg' => 'Saint Petersburg','Yangon' => 'Yangon','Abidjan' => 'Abidjan','Chengdu' => 'Chengdu','Alexandria' => 'Alexandria','Kolkata' => 'Kolkata','Ankara' => 'Ankara','Xi\'an' => 'Xi\'an','Surat' => 'Surat','Johannesburg' => 'Johannesburg','Dar es Salaam' => 'Dar es Salaam','Suzhou' => 'Suzhou','Harbin' => 'Harbin','Giza' => 'Giza','Zhengzhou' => 'Zhengzhou','New Taipei City' => 'New Taipei City','Karachi' => 'Karachi','Cape Town' => 'Cape Town','Yokohama' => 'Yokohama','Berlin' => 'Berlin','Busan' => 'Busan','Hangzhou' => 'Hangzhou','Xiamen' => 'Xiamen','Quanzhou' => 'Quanzhou','Rawalpindi' => 'Rawalpindi','Jeddah' => 'Jeddah','Durban' => 'Durban','Hyderabad' => 'Hyderabad','Kabul' => 'Kabul','Casablanca' => 'Casablanca','Hefei' => 'Hefei','Pyongyang' => 'Pyongyang','Madrid' => 'Madrid','Peshawar' => 'Peshawar','Ekurhuleni' => 'Ekurhuleni','Nairobi' => 'Nairobi','Zhongshan' => 'Zhongshan','Pune' => 'Pune','Addis Ababa' => 'Addis Ababa','Jaipur' => 'Jaipur','Buenos Aires' => 'Buenos Aires','Wenzhou' => 'Wenzhou',
+                ],
+            ])
             ->add('name', null, [
                 'label' => 'Nom',
             ])
@@ -54,6 +58,8 @@ class FicheType extends AbstractType
                 'label' => 'Lien du profil instagram',
             ])
         ;
+        $entity = $builder->getData();
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

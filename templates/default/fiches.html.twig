@@ -11,4 +11,13 @@
     <div>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci deleniti dolor facilis ipsa iure maiores molestias obcaecati officiis, placeat saepe? Asperiores consectetur deleniti ipsa nesciunt perferendis quidem suscipit tempora ut. Lorem ipsum dolor sit amet, consectetur adipisicing elit. A asperiores iure, maiores nesciunt nostrum sit soluta vitae? Ab, aliquam aliquid deleniti enim fugiat id nemo officia ratione, rem veniam vitae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab dicta enim, illo in inventore ipsam iste magni maxime minima minus molestiae, natus neque nihil odio quia quis tempora ullam voluptatibus!</p>
     </div>
+
+    <div class="cities">
+        {% for city in cities %}
+            <div>
+                <h2><a href="?city={{ city.city }}">{{ city.city }}</a></h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eveniet mollitia nostrum quasi tempora vitae voluptatibus! Distinctio doloremque molestias nostrum sint soluta, voluptatum. Aliquid dicta, dolore mollitia nobis rem veniam?</p>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
