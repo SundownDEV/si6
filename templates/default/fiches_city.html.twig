@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body_id 'tops' %}
+
+{% block body %}
+    <div class="page-header-title">
+        <h1>Une année<span>de voyages</span></h1>
+        <p>Fiches pratiques - {{ city }}</p>
+    </div>
+
+    <div class="cities">
+        {% for fiche in fiches %}
+            <div>
+                <h2><a href="{{ path('default_fiches_show', {id: fiche.id}) }}">{{ fiche.name }}</a></h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eveniet mollitia nostrum quasi tempora vitae voluptatibus! Distinctio doloremque molestias nostrum sint soluta, voluptatum. Aliquid dicta, dolore mollitia nobis rem veniam?</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

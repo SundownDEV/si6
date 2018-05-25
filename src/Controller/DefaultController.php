@@ -71,6 +71,27 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/fiches/{city}", name="fiches_city")
+     */
+    public function fichesCity(FicheRepository $fiche, $city): Response
+    {
+        return $this->render('default/fiches_city.html.twig', [
+            'city' => $city,
+            'fiches' => $fiche->findBy(['city' => $city])
+        ]);
+    }
+
+    /**
+     * @Route("/fiche/{id}", name="fiches_show")
+     */
+    public function fichesShow(FicheRepository $fiche, $id): Response
+    {
+        return $this->render('default/fiches_show.html.twig', [
+            'fiche' => $fiche->findBy(['id' => $id])
+        ]);
+    }
+
+    /**
      * @Route("/mooks", name="mooks")
      */
     public function mooks(PostRepository $posts): Response
