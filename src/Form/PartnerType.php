@@ -24,8 +24,8 @@ class PartnerType extends AbstractType
             ])
             ->add('image', FileType::class, [
                 'label' => 'Logo à afficher',
-                'required' => false,
-                'attr' => ['class' => 'form-control']
+                'attr' => ['class' => 'form-control'],
+                'data_class' => null,
             ])
         ;
     }

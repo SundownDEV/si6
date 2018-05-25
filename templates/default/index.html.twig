@@ -1,13 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
     <section class="anneeVoyages">
         <div class="container-img">
             <div class="container-content">
                 <h1>Une année<span>de voyages</span></h1>
                 <p>DES VOYAGES TESTÉS... DES IDÉES POUR PARTIR TOUTE L'ANNÉE !</p>
             </div>
+        </div>
+        
+        <div class="top-scroll-img">
+            <img src="{{ asset('img/scroll.png') }}" alt="">
         </div>
 
         <h2 class="section-title">Soyez un voyageur averti !</h2>
@@ -41,7 +44,7 @@
     </section>
 
     <section class="landing-section-split">
-        <img src="{{ asset('img/mook-img.png') }}" alt="">
+        <img src="{{ asset('img/img_fiches.png') }}" width="520" height="676" alt="">
 
         <div class="landing-section-split-text">
         <h2>FICHES PRATIQUES</h2>
@@ -98,21 +101,13 @@
         <h2>Nos partenaires</h2>
 
         <div class="partners">
-            <a href="#">
-                <div>
-                    <img src="{{ asset('img/partenaire_sample.png') }}" alt="">
-                </div>
-            </a>
-            <a href="#">
-                <div>
-                    <img src="{{ asset('img/partenaire_sample.png') }}" alt="">
-                </div>
-            </a>
-            <a href="#">
-                <div>
-                    <img src="{{ asset('img/partenaire_sample.png') }}" alt="">
-                </div>
-            </a>
+            {% for partner in partners %}
+                <a href="{{ partner.link }}" target="_blank">
+                    <div>
+                        <img src="{{ asset('uploads/') ~ partner.image }}" width="200" height="auto" alt="">
+                    </div>
+                </a>
+            {% endfor %}
         </div>
     </section>
 
@@ -146,9 +141,10 @@
         <div class="twitter-feed">
             {% for tweet in tweets|slice(0, 3) %}
                 <div class="tweet">
-                    <div class="avatar">
-                        <img src="{{ tweet.user.profile_image_url }}" alt="">
-                        <h2>{{ tweet.user.name }} <small>le {{ tweet.created_at|date("d/m") }} à {{ tweet.created_at|date("m:s") }}</small></h2>
+                    <div>
+                        <img src="{{ tweet.user.profile_image_url }}" class="avatar" alt="">
+                        <h2>{{ tweet.user.name }} <small>le {{ tweet.created_at|date("d/m") }} à {{ tweet.created_at|date("m:s") }}
+                                <img src="{{ asset('img/twitter-icon.png') }}" width="32" height="32" alt=""></small></h2>
                     </div>
 
                     <p>{{ tweet.text }}</p>

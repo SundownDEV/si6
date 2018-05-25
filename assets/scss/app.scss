@@ -10,15 +10,19 @@ $web-font-path: 'data:text/css;base64,';
 @include lato-include-font('normal');
 @include lato-include-font('bold');
 
-li {
-  list-style-type: none;
-}
-
 body {
   font-family: 'Assistant', sans-serif;
   margin: 0;
   padding: 0;
   padding-top: 150px;
+}
+
+li {
+  list-style-type: none;
+}
+
+a {
+  color: #363636;
 }
 
 .social-link {
@@ -128,7 +132,6 @@ footer {
     width: 1058px;
     height: 486px;
     background: url("../../public/img/beach.png");
-    margin-bottom: 170px;
 
     .container-content {
       display: flex;
@@ -159,6 +162,12 @@ footer {
       }
     }
   }
+}
+
+.top-scroll-img {
+  display: flex;
+  justify-content: center;
+  margin: 100px 0;
 }
 
 .section-title {
@@ -246,7 +255,7 @@ footer {
     padding: 25px;
     margin-top: 50px;
 
-    img {
+    img.avatar {
       float: left;
       margin-right: 15px;
     }
@@ -297,6 +306,36 @@ footer {
       margin-top: 30px;
       font-weight: bold;
       font-size: 18px;
+    }
+  }
+}
+
+body#tops {
+  .page-header-title {
+    background: #f9e6a6;
+    padding: 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+    margin-bottom: 50px;
+
+    h1,p {
+      text-shadow: 0 0 15px rgba(0, 0, 0, 0.20);
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-weight: bold;
+      font-size: 50px;
+      
+      span {
+        display: block;
+      }
+    }
+
+    p {
+      font-size: 32px;
     }
   }
 }

@@ -23,8 +23,8 @@
             <tr>
                 <td>{{ company.twitter }}</td>
                 <td>
-                    <a href="{{ path('admin_company_show', {'id': company.id}) }}">Afficher</a>
-                    <a href="{{ path('admin_company_edit', {'id': company.id}) }}">Modifier</a>
+                    <a href="{{ path('admin_company_show', {'id': company.id}) }}" class="btn btn-xs">Afficher</a>
+                    <a href="{{ path('admin_company_edit', {'id': company.id}) }}" class="btn btn-xs btn-primary">Modifier</a>
                 </td>
             </tr>
         {% else %}

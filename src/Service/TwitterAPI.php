@@ -12,6 +12,7 @@
 namespace App\Service;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
+use App\Repository\CompanyRepository;
 
 class TwitterAPI
 {
@@ -58,5 +59,22 @@ class TwitterAPI
     {
         $tweets = $this->connection->get('statuses/user_timeline', ['screen_name' => $username, 'count' => $count, 'exclude_replies' => $exclude_replies]);
         return $tweets ?? null;
+    }
+
+    public function getHomepageTweets(CompanyRepository $company)
+    {
+        $tweets = [];
+
+        $companies = $company->findAll();
+
+        foreach ($companies as $company) {
+            $tweet = $this->getUserLastTweet($company->getTwitter());
+
+            if (!empty($tweet) && !is_null($tweet) && count($tweets) < 3) {
+                $tweets[] = $tweet;
+            }
+        }
+
+        return $tweets;
     }
 }

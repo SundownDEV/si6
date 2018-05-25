@@ -17,7 +17,7 @@
 <body>
 {% block header %}
 <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Une Année de Voyage</a>
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{ path('admin_index') }}">Une Année de Voyage</a>
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
             <a class="nav-link" href="{{ logout_url('main') }}">Déconnexion</a>
@@ -58,6 +58,18 @@
                         <a class="nav-link" href="{{ path('admin_message_index') }}">
                             <span data-feather="shopping-cart"></span>
                             <i class="fa fa-envelope"></i> Messages
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('admin_place_index') }}">
+                            <span data-feather="shopping-cart"></span>
+                            <i class="fa fa-location-arrow"></i> Commerces
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('admin_fiche_index') }}">
+                            <span data-feather="shopping-cart"></span>
+                            <i class="fa fa-file-alt"></i> Fiches pratiques
                         </a>
                     </li>
                     <li class="nav-item">

@@ -33,7 +33,9 @@ class Partner
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string")
+     *
+     * @Assert\NotBlank(message="Please, upload the product brochure as a PDF file.")
      * @Assert\Image()
      */
     private $image;
@@ -60,12 +62,12 @@ class Partner
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getImage()
     {
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage($image)
     {
         $this->image = $image;
 

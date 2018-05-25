@@ -134,16 +134,19 @@ class BlogController extends AbstractController
     {
         $this->denyAccessUnlessGranted('edit', $post, 'Posts can only be edited by their authors.');
 
-        $fileName = $post->getImage();
-        $image = new File($fileUploader->getTargetDirectory() . '/' . $post->getImage());
-        $post->setImage($image);
-
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $post->setImage($fileName);
             $post->setSlug(Slugger::slugify($post->getTitle()));
+
+            /**
+             * @var Symfony\Component\HttpFoundation\File\UploadedFile $file
+             */
+            $file = $post->getImage();
+            $fileName = $fileUploader->upload($file);
+
+            $post->setImage($fileName);
 
             $this->getDoctrine()->getManager()->flush();
 

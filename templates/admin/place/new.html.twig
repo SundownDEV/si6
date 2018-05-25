@@ -1,0 +1,11 @@
+{% extends '@admin/layout.html.twig' %}
+
+{% block title %}Nouveau commerce{% endblock %}
+
+{% block main %}
+    {{ include('@admin/place/_form.html.twig') }}
+
+    <hr>
+
+    <a href="{{ path('admin_place_index') }}" class="btn btn-primary">Retour à la liste</a>
+{% endblock %}

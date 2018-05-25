@@ -27,8 +27,8 @@
                 <td><img src="{{ asset('uploads/') ~ partner.image }}" alt=""></td>
                 <td>{{ partner.link }}</td>
                 <td>
-                    <a href="{{ path('admin_partner_show', {'id': partner.id}) }}">Afficher</a>
-                    <a href="{{ path('admin_partner_edit', {'id': partner.id}) }}">Modifier</a>
+                    <a href="{{ path('admin_partner_show', {'id': partner.id}) }}" class="btn btn-xs">Afficher</a>
+                    <a href="{{ path('admin_partner_edit', {'id': partner.id}) }}" class="btn btn-xs btn-primary">Modifier</a>
                 </td>
             </tr>
         {% else %}

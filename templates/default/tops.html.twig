@@ -3,5 +3,21 @@
 {% block body_id 'tops' %}
 
 {% block body %}
-<p>dd</p>
+    <div>
+        <a href="{{ path('default_tops') }}" class="badge badge-secondary">Tous</a>
+        <a href="{{ path('default_tops') }}?type=hôtel" class="badge badge-secondary">Hôtels</a>
+        <a href="{{ path('default_tops') }}?type=restaurant" class="badge badge-secondary">Restaurants</a>
+        <a href="{{ path('default_tops') }}?type=SPAs" class="badge badge-secondary">SPAs & Thalassos</a>
+    </div>
+
+    <hr>
+    
+    {% for place in places %}
+        <div class="place">
+            <h2><a href="{{ place.link }}" target="_blank">{{ place.name }}</a></h2>
+            <p><strong>Type :</strong> {{ place.type }}</p>
+            <p><strong>Note :</strong> {{ place.note }}/5</p>
+        </div>
+        <hr>
+    {% endfor %}
 {% endblock %}

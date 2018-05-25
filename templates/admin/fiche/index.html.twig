@@ -1,0 +1,43 @@
+{% extends '@admin/layout.html.twig' %}
+
+{% block title %}Liste des fiches{% endblock %}
+
+{% block body_id 'admin_fiche_index' %}
+
+{% block buttons %}
+    <div class="btn-group mr-2">
+        <a href="{{ path('admin_fiche_new') }}" class="btn btn-sm btn-outline-secondary">Ajouter une fiche</a>
+    </div>
+{% endblock %}
+
+{% block main %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Adresse</th>
+                <th>Email</th>
+                <th>Numéro de téléphone</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for fiche in fiches %}
+            <tr>
+                <td>{{ fiche.name }}</td>
+                <td>{{ fiche.address }}</td>
+                <td>{{ fiche.email }}</td>
+                <td>{{ fiche.phone }}</td>
+                <td>
+                    <a href="{{ path('admin_fiche_show', {'id': fiche.id}) }}" class="btn btn-xs">Afficher</a>
+                    <a href="{{ path('admin_fiche_edit', {'id': fiche.id}) }}" class="btn btn-xs btn-primary">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">Aucun résultat</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

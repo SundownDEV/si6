@@ -1,0 +1,66 @@
+{% extends '@admin/layout.html.twig' %}
+
+{% block title %}Fiche pratique{% endblock %}
+
+{% block main %}
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Image</th>
+                <td><img src="{{ asset('uploads/') ~ fiche.image }}" width="35%" alt=""></td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ fiche.name }}</td>
+            </tr>
+            <tr>
+                <th>Pays</th>
+                <td>{{ fiche.country }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ fiche.address }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ fiche.email }}</td>
+            </tr>
+            <tr>
+                <th>Numéro de tél.</th>
+                <td>{{ fiche.phone }}</td>
+            </tr>
+            <tr>
+                <th>Type de nourriture sur place</th>
+                <td>{{ fiche.foodType }}</td>
+            </tr>
+            <tr>
+                <th>Nos recommandations</th>
+                <td>{{ fiche.recommandations }}</td>
+            </tr>
+            <tr>
+                <th>Les horaires d'ouverture et/ou le meilleur moment pour s'y rendre</th>
+                <td>{{ fiche.schedule }}</td>
+            </tr>
+            <tr>
+                <th>Gamme de prix</th>
+                <td>{{ fiche.prices }}</td>
+            </tr>
+            <tr>
+                <th>Lien de la page facebook</th>
+                <td>{{ fiche.fbLink }}</td>
+            </tr>
+            <tr>
+                <th>Lien du profil instagram</th>
+                <td>{{ fiche.instaLink }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_fiche_index') }}" class="btn btn-primary">Retour à la liste</a>
+
+    <a href="{{ path('admin_fiche_edit', {'id': fiche.id}) }}" class="btn btn-primary">Modifier</a>
+
+    <hr>
+
+    {{ include('@admin/fiche/_delete_form.html.twig') }}
+{% endblock %}

@@ -13,6 +13,8 @@ namespace App\Controller;
 
 use App\Entity\Post;
 use App\Repository\CompanyRepository;
+use App\Repository\PartnerRepository;
+use App\Repository\PlaceRepository;
 use App\Service\TwitterAPI;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
@@ -32,30 +34,28 @@ class DefaultController extends Controller
     /**
      * @Route("/", name="index")
      */
-    public function index(PostRepository $posts, CompanyRepository $company, TwitterAPI $twitterAPI): Response
+    public function index(PostRepository $posts, PartnerRepository $partner, CompanyRepository $company, TwitterAPI $twitterAPI): Response
     {
-        $companies = $company->findAll();
-        $tweets = [];
-
-        foreach ($companies as $company) {
-            if (count($tweets) < 3 && !is_null($tweet = $twitterAPI->getUserLastTweet($company->getTwitter()))) {
-                $tweets[] = $tweet;
-            }
-        }
-
         return $this->render('default/index.html.twig', [
             'posts' => $posts->findLatest(),
-            'tweets' => $tweets,
+            'tweets' => $twitterAPI->getHomepageTweets($company),
+            'partners' => $partner->findAll(),
         ]);
     }
 
     /**
      * @Route("/places", name="tops")
      */
-    public function tops(PostRepository $posts): Response
+    public function tops(Request $request, PlaceRepository $place): Response
     {
+        if ($type = $request->query->get('type')) {
+            $places = $place->findAllByType($type);
+        } else {
+            $places = $place->findAllByNote();
+        }
+
         return $this->render('default/tops.html.twig', [
-            'posts' => $posts->findLatest()
+            'places' => $places
         ]);
     }
 
@@ -102,17 +102,5 @@ class DefaultController extends Controller
             'message' => $message,
             'form' => $form->createView(),
         ]);
-    }
-
-    /**
-     * @Route("/test", name="test")
-     */
-    public function test()
-    {
-        $twitter = new TwitterAPI();
-
-        $t = $twitter->getUserLastTweet('sundowndev');
-
-        return $t->text;
     }
 }

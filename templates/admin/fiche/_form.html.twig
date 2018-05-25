@@ -1,0 +1,4 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn btn-success">{{ button_label|default('Enregistrer') }}</button> <a href="{{ path('admin_fiche_index') }}" class="btn btn-primary">Retour à la liste</a>
+{{ form_end(form) }}

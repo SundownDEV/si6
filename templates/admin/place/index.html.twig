@@ -1,0 +1,41 @@
+{% extends '@admin/layout.html.twig' %}
+
+{% block title %}Liste des commerces{% endblock %}
+
+{% block body_id 'admin_place_index' %}
+
+{% block buttons %}
+    <div class="btn-group mr-2">
+        <a href="{{ path('admin_place_new') }}" class="btn btn-sm btn-outline-secondary">Ajouter un commerce</a>
+    </div>
+{% endblock %}
+
+{% block main %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Note</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for place in places %}
+            <tr>
+                <td>{{ place.name }}</td>
+                <td>{{ place.type }}</td>
+                <td>{{ place.note }}</td>
+                <td>
+                    <a href="{{ path('admin_place_show', {'id': place.id}) }}" class="btn btn-xs">Afficher</a>
+                    <a href="{{ path('admin_place_edit', {'id': place.id}) }}" class="btn btn-xs btn-primary">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Aucun résultat</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
