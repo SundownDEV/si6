@@ -174,7 +174,6 @@ footer {
   font-size: 30px;
   text-align: center;
   font-weight: bold;
-  margin-bottom: 50px;
 }
 
 .landing-words-list {
@@ -220,6 +219,7 @@ footer {
     display: flex;
     justify-content: space-around;
     flex-direction: row;
+    align-items: center;
   }
 }
 
@@ -310,7 +310,6 @@ footer {
   }
 }
 
-body#tops {
   .page-header-title {
     background: #f9e6a6;
     padding: 35px;
@@ -338,4 +337,13 @@ body#tops {
       font-size: 32px;
     }
   }
-}
+
+  .barre {
+    display: flex;
+    width: 200px;
+    height: 10px;
+    background: #efd242;
+    margin: auto;
+    margin-bottom: 50px;
+    margin-top: 30px;
+  }

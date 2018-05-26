@@ -130,7 +130,7 @@ class BlogController extends AbstractController
      *
      * @Route("/{id}/edit", requirements={"id": "\d+"}, methods={"GET", "POST"}, name="edit")
      */
-    public function edit(Request $request, Post $post, FileUploader $fileUploader): Response
+    public function edit(Request $request, Post $post, FileUploader $fileUploader, PostRepository $yolo): Response
     {
         $this->denyAccessUnlessGranted('edit', $post, 'Posts can only be edited by their authors.');
 
@@ -139,12 +139,16 @@ class BlogController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $post->setSlug(Slugger::slugify($post->getTitle()));
+            if (is_null($post->getImage())) {
+                $fileName = $yolo->find($post->getId())->getImage();
+            } else {
+                /**
+                 * @var Symfony\Component\HttpFoundation\File\UploadedFile $file
+                 */
+                $file = $post->getImage();
+                $fileName = $fileUploader->upload($file);
+            }
 
-            /**
-             * @var Symfony\Component\HttpFoundation\File\UploadedFile $file
-             */
-            $file = $post->getImage();
-            $fileName = $fileUploader->upload($file);
 
             $post->setImage($fileName);
 

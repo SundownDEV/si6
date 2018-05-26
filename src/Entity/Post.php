@@ -100,7 +100,7 @@ class Post
     /**
      * @ORM\Column(type="string")
      *
-     * @Assert\NotBlank(message="Please, upload the product brochure as a PDF file.")
+     * @Assert\NotBlank(message="Veuillez télécharger une image.")
      * @Assert\Image()
      */
     private $image;

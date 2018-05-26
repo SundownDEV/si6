@@ -67,6 +67,7 @@ class PostType extends AbstractType
                 'label' => 'Image de couverture (jpg, png)',
                 'attr' => ['class' => 'form-control'],
                 'data_class' => null,
+                'required' => false,
             ])
         ;
     }
